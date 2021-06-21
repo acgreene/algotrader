@@ -1,1 +1,5 @@
 .env
+geckodriver
+geckodriver.exe
+geckodriver.log
+token

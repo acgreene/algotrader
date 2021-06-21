@@ -1,0 +1,11 @@
+# External python modules required to use the algotrader
+datetime
+logging
+pandas
+pickle
+python-dotenv
+requests
+requests-cache
+selenium
+tda-api
+warnings
