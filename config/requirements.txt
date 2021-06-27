@@ -1,0 +1,18 @@
+# External python modules required to use the algotrader
+alpaca-trade-api
+datetime
+logging
+numpy
+pandas
+python-dotenv
+pyyaml
+requests
+requests-cache
+scipy
+selenium
+warnings
+websocket-client
+
+#backtest
+yfinance
+pyalgotrade
