@@ -13,17 +13,25 @@ class BuyAndHoldStrategy(strategy.BacktestingStrategy):
         self.setUseAdjustedValues(True) #accounts for dividends and split
         self.position = None #own 0 stock at start
         
+    def onEnterOk(self, position):
+        self.info(f"{position.getEntryOrder().getExecutionInfo()}")
+        
     def onBars(self, bars):
         bar = bars[self.instrument]
-        self.info(bar.getClose())
+        #self.info(bar.getClose()) 
         
         if self.position is None:
-            close = bar.getClose()
+            close = bar.getAdjClose()
+            broker = self.getBroker()
+            cash = broker.getCash()
             
-            #self.position = self.enterLong(self.instrument, )
+            quantity = cash / close
+            self.position = self.enterLong(self.instrument, quantity)
 
 feed = yahoofeed.Feed()
 feed.addBarsFromCSV("spy", "backtest/burns_200_day_crush/data/spy.csv")
 
 strategy = BuyAndHoldStrategy(feed, "spy")
 strategy.run()
+portfolio_value = strategy.getBroker().getEquity() + strategy.getBroker().getCash()
+print(portfolio_value)
